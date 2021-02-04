@@ -107,10 +107,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 ul,
 li {
   list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 .sidebar {
@@ -119,72 +124,76 @@ li {
   bottom: 0;
 }
 
-.nav-item div {
+.nav-item {
+  div {
+    height: 46px;
+    padding: 10px;
+    margin-top: 14px;
+  }
+  img {
+    margin-right: 21px;
+  }
+  .email-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .icon-hovered {
+    display: none;
+    margin-right: 21px;
+  }
+  .email-icon-hovered {
+    width: 22px;
+    height: 22px;
+    display: none;
+    margin-right: 21px;
+  }
+  
+  &:hover div {
+    background-color: #faceaf;
+    border-radius: 25px;
+  }
+  &:hover p {
+    color: $theme_orange;
+  }
+  &:hover .icon, .email-icon {
+    display: none;
+  }
+  &:hover .icon-hovered, .email-icon-hovered {
+    display: block;
+  }
+  &:hover .email-icon-hovered {
+    filter: invert(42%) sepia(19%) saturate(6136%) hue-rotate(2deg)
+    brightness(106%) contrast(105%);
+  }
+}
+
+.active {
+  p {
+    color: $theme_orange;
+  }
+  .icon, .email-icon {
+    display: none;
+  }
+  .icon-hovered, .email-icon-hovered {
+    display: block;
+  }
+  .email-icon-hovered {
+    filter: invert(42%) sepia(19%) saturate(6136%) hue-rotate(2deg)
+    brightness(106%) contrast(105%);
+  }
+}
+
+.signout-wrapper {
+  cursor: pointer;
   height: 46px;
   padding: 10px;
-  margin-top: 14px;
-}
-.nav-item img {
-  margin-right: 21px;
-}
-
-.email-icon {
-  width: 20px;
-  height: 20px;
-}
-
-.email-icon-hovered {
-  width: 22px;
-  height: 22px;
-}
-
-.nav-item .icon-hovered,
-.nav-item .email-icon-hovered {
-  display: none;
-  margin-right: 21px;
-}
-
-.nav-item:hover div {
-  background-color: #faceaf;
-  border-radius: 25px;
-}
-
-.nav-item:hover p {
-  color: #ff6600;
-}
-
-.nav-item:hover .icon,
-.nav-item:hover .email-icon {
-  display: none;
-}
-
-.nav-item:hover .icon-hovered,
-.nav-item:hover .email-icon-hovered {
-  display: block;
-}
-
-.nav-item:hover .email-icon-hovered {
-  filter: invert(42%) sepia(19%) saturate(6136%) hue-rotate(2deg)
-    brightness(106%) contrast(105%);
-}
-
-.active p {
-  color: #ff6600;
-}
-
-.active .icon,
-.active .email-icon {
-  display: none;
-}
-
-.active .icon-hovered {
-  display: block;
-}
-
-.active .email-icon-hovered {
-  display: block;
-  filter: invert(42%) sepia(19%) saturate(6136%) hue-rotate(2deg)
-    brightness(106%) contrast(105%);
+  .icon {
+    margin-right: 21px;
+  }
+  &:hover {
+    background-color: $light_orange;
+    border-radius: 25px;
+  }
 }
 
 .post {
@@ -195,25 +204,5 @@ li {
 
 .btn-primary:not(:disabled):not(.disabled):active {
   background-color: #cc5302;
-}
-
-.signout-wrapper {
-  cursor: pointer;
-  height: 46px;
-  padding: 10px;
-}
-
-.signout-wrapper .icon {
-  margin-right: 21px;
-}
-
-.signout-wrapper:hover {
-  background-color: #faceaf;
-  border-radius: 25px;
-}
-
-a {
-  color: black;
-  text-decoration: none;
 }
 </style>

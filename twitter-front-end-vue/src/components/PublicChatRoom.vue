@@ -135,7 +135,10 @@ export default {
       });
       this.$socket.on("onlineUsers", (data) => {
         console.log("connection succeed!");
-        console.log(data);
+        console.log({
+          onlineUsers: data.onlineUsers,
+          countOfUsers: data.countOfUsers
+        });
         this.onlineUsers = data.onlineUsers;
         this.countOfUsers = data.countOfUsers;
       });
