@@ -20,9 +20,7 @@
       </div>
       <div class="tweet-reply-container">
         <!-- 插入TweetReply -->
-        <h5 class="no-reply" v-if="replies.length < 1">
-          本推文目前沒有回覆Q__Q
-        </h5>
+        <h5 class="no-reply" v-if="replies.length < 1">本推文目前沒有回覆Q__Q</h5>
         <TweetReply
           v-for="reply in replies"
           :key="reply.id"
@@ -75,7 +73,7 @@ export default {
     Navbar,
     FollowRecommend,
     TweetReply,
-    TweetDetail,
+    TweetDetail
   },
   data() {
     return {
@@ -90,14 +88,14 @@ export default {
           id: -1,
           account: "",
           name: "",
-          avatar: "",
+          avatar: ""
         },
         isLiked: false,
         repliedCount: 0,
         LikeCount: 0,
-        isSelf: false,
+        isSelf: false
       },
-      replies: [],
+      replies: []
     };
   },
   beforeRouteUpdate(to, from, next) {
@@ -116,7 +114,7 @@ export default {
     this.fetchCurrentUser();
   },
   computed: {
-    ...mapState(["currentUser", "isAuthenticated"]),
+    ...mapState(["currentUser", "isAuthenticated"])
   },
   methods: {
     async fetchTweet(tweetId) {
@@ -127,7 +125,7 @@ export default {
         console.log("error:", error);
         Toast.fire({
           icon: "error",
-          title: "暫時無法取得推文細節，請稍候再試！",
+          title: "暫時無法取得推文細節，請稍候再試！"
         });
       }
     },
@@ -141,7 +139,7 @@ export default {
         if (data.length === 0) return;
         Toast.fire({
           icon: "error",
-          title: "暫時無法取得推文回覆，請稍候再試！",
+          title: "暫時無法取得推文回覆，請稍候再試！"
         });
       }
     },
@@ -154,13 +152,13 @@ export default {
         const { data } = response;
         this.user = {
           ...this.user,
-          ...data,
+          ...data
         };
       } catch (error) {
         console.log("error:", error);
         Toast.fire({
           icon: "error",
-          title: "暫時無法取得用戶資料，請稍等！",
+          title: "暫時無法取得用戶資料，請稍等！"
         });
       }
     },
@@ -183,32 +181,31 @@ export default {
           User: {
             account: this.user.account,
             avatar: this.user.avatar,
-            name: this.user.name,
-          },
+            name: this.user.name
+          }
         });
         this.tweet.repliedCount++;
       } catch (error) {
         console.log("error:", error);
         Toast.fire({
           icon: "error",
-          title: "暫時無法新增回覆，請稍候再試！",
+          title: "暫時無法新增回覆，請稍候再試！"
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .upper-area-content {
   display: flex;
   align-items: top;
   padding-left: 15px;
-}
-
-.upper-area-content p {
-  margin: 0;
-  line-height: 10px;
+  p {
+    margin: 0;
+    line-height: 10px;
+  }
 }
 
 .main {
@@ -218,35 +215,32 @@ export default {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
   border-bottom: 1px solid #e6ecf0;
+  .main-title {
+    border-bottom: 1px solid #e6ecf0;
+    height: 55px;
+    .arrow {
+      background-image: url("https://i.imgur.com/MHQuvWA.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      margin: auto 43px auto 1.3rem;
+      width: 17px;
+      height: 14px;
+    }
+
+    .title {
+      padding: 0 10px 10px 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 55px;
+    }
+  }
 }
 
 .tweet-reply-container {
   height: 100%;
-}
-
-.main-title {
-  border-bottom: 1px solid #e6ecf0;
-  height: 55px;
-}
-
-.arrow {
-  background-image: url("https://i.imgur.com/MHQuvWA.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  margin: auto 43px auto 1.3rem;
-  width: 17px;
-  height: 14px;
-}
-
-.title {
-  padding: 0 10px 10px 0;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 55px;
-}
-
-.no-reply {
-  margin: 15% 25%;
+  .no-reply {
+    margin: 15% 25%;
+  }
 }
 </style>

@@ -22,19 +22,13 @@
       <main>
         <div class="info-area d-flex flex-column align-items-end pb-3">
           <div class="image-wrapper">
-            <div
-              class="cover-cropper"
-              v-if="cover === '' && user.cover === '0'"
-            >
+            <div class="cover-cropper" v-if="cover === '' && user.cover === '0'">
               <img src="../assets/default-cover.jpg" class="cover" />
             </div>
             <div class="cover-cropper" v-else>
               <img :src="user.cover" class="cover" />
             </div>
-            <div
-              class="image-cropper"
-              v-if="avatar === '' && user.avatar === null"
-            >
+            <div class="image-cropper" v-if="avatar === '' && user.avatar === null">
               <img src="../assets/default-user.svg" class="avatar" />
             </div>
             <div class="image-cropper" v-else>
@@ -63,17 +57,9 @@
                 class="deleteFollow"
                 v-if="user.isFollowed"
                 @click.stop.prevent="deleteFollow(user.id)"
-              >
-                取消跟隨
-              </div>
+              >取消跟隨</div>
 
-              <div
-                class="unfollow"
-                v-else
-                @click.stop.prevent="follow(user.id)"
-              >
-                跟隨
-              </div>
+              <div class="unfollow" v-else @click.stop.prevent="follow(user.id)">跟隨</div>
             </div>
           </div>
         </div>
@@ -91,9 +77,7 @@
               params: { id: user.id, followship: 'followings' },
             }"
           >
-            <p class="followings-count mr-2">
-              {{ user.followingsCount }}個跟隨中
-            </p>
+            <p class="followings-count mr-2">{{ user.followingsCount }}個跟隨中</p>
           </router-link>
           <router-link
             :to="{
@@ -138,9 +122,7 @@
                       this.introduction.length > 160 ||
                       this.name.length === 0
                     "
-                  >
-                    儲存
-                  </button>
+                  >儲存</button>
                 </div>
                 <div class="modal-body px-0">
                   <div class="edit-cover">
@@ -160,12 +142,7 @@
                         v-if="cover !== ''"
                       />
                       <!--即時帶入user的cover-->
-                      <img
-                        :src="user.cover"
-                        alt="present-cover"
-                        class="edit-cover-photo"
-                        v-else
-                      />
+                      <img :src="user.cover" alt="present-cover" class="edit-cover-photo" v-else />
                       <input
                         type="file"
                         id="cover-image"
@@ -217,11 +194,7 @@
                           @change="handleAvatarChange"
                         />
                         <img src="../assets/camera.svg" class="avatar-camera" />
-                        <img
-                          src="../assets/plus.svg"
-                          alt="avatar-plus"
-                          class="avatar-plus"
-                        />
+                        <img src="../assets/plus.svg" alt="avatar-plus" class="avatar-plus" />
                       </div>
                     </div>
                   </div>
@@ -237,9 +210,7 @@
                       v-model="name"
                       :placeholder="user.name"
                     ></textarea>
-                    <div class="name-edit-num-limit">
-                      {{ this.name.length }}/50
-                    </div>
+                    <div class="name-edit-num-limit">{{ this.name.length }}/50</div>
                     <div class="edit-title">自我介紹</div>
                     <textarea
                       name="introduction"
@@ -250,9 +221,7 @@
                       v-model="introduction"
                       :placeholder="user.introduction"
                     ></textarea>
-                    <div class="intro-edit-num-limit">
-                      {{ this.introduction.length }}/160
-                    </div>
+                    <div class="intro-edit-num-limit">{{ this.introduction.length }}/160</div>
                   </div>
                 </div>
               </div>
@@ -268,21 +237,16 @@
                   params: { id: user.id },
                 }"
                 class="nav-link"
-                >推文</router-link
-              >
+              >推文</router-link>
             </li>
-            <li
-              class="nav-item"
-              @click.stop.prevent="toggleTab('with_replies')"
-            >
+            <li class="nav-item" @click.stop.prevent="toggleTab('with_replies')">
               <router-link
                 :to="{
                   name: 'user-profile',
                   params: { id: user.id, category: 'with_replies' },
                 }"
                 class="nav-link"
-                >推文與回覆</router-link
-              >
+              >推文與回覆</router-link>
             </li>
             <li class="nav-item" @click.stop.prevent="toggleTab('likes')">
               <router-link
@@ -291,8 +255,7 @@
                   params: { id: user.id, category: 'likes' },
                 }"
                 class="nav-link"
-                >喜歡的內容</router-link
-              >
+              >喜歡的內容</router-link>
             </li>
           </ul>
         </div>
@@ -318,10 +281,7 @@
             />
           </div>
 
-          <div
-            class="user-tweets-replies-panel"
-            v-if="nowTabbed === 'with_replies'"
-          >
+          <div class="user-tweets-replies-panel" v-if="nowTabbed === 'with_replies'">
             <!-- 拉取資料完成前顯示Spinner -->
             <Spinner v-if="isLoading" />
 
@@ -391,11 +351,11 @@ export default {
     UserTweets,
     UserLikedTweets,
     UserTweetsReplies,
-    Spinner,
+    Spinner
   },
   mixins: [emptyImageFilter],
   computed: {
-    ...mapState(["currentUser", "isAuthenticated"]),
+    ...mapState(["currentUser", "isAuthenticated"])
   },
   data() {
     return {
@@ -408,7 +368,7 @@ export default {
       avatar: "",
       name: "",
       introduction: "",
-      isLoading: true,
+      isLoading: true
     };
   },
   methods: {
@@ -429,7 +389,7 @@ export default {
 
         Toast.fire({
           icon: "error",
-          title: "無法取得使用者推文，請稍後再試",
+          title: "無法取得使用者推文，請稍後再試"
         });
       }
     },
@@ -450,7 +410,7 @@ export default {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得使用者喜歡的內容，請稍後再試",
+          title: "無法取得使用者喜歡的內容，請稍後再試"
         });
       }
     },
@@ -465,13 +425,13 @@ export default {
         const { data } = response;
         this.user = {
           ...this.user,
-          ...data,
+          ...data
         };
       } catch (error) {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得使用者資料，請稍後再試",
+          title: "無法取得使用者資料，請稍後再試"
         });
       }
     },
@@ -485,7 +445,7 @@ export default {
         const { data } = response;
         //建構set()建構子實例，取出TweetId不重複的物件
         const set = new Set();
-        this.replies = data.filter((reply) =>
+        this.replies = data.filter(reply =>
           !set.has(reply.TweetId) ? set.add(reply.TweetId) : false
         );
         this.isLoading = false;
@@ -494,7 +454,7 @@ export default {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得使用者推文與回覆，請稍後再試",
+          title: "無法取得使用者推文與回覆，請稍後再試"
         });
       }
     },
@@ -510,13 +470,13 @@ export default {
         console.log(response);
         this.user = {
           ...this.user,
-          isFollowed: true,
+          isFollowed: true
         };
       } catch (error) {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法成功追蹤，請稍後再試",
+          title: "無法成功追蹤，請稍後再試"
         });
       }
     },
@@ -529,13 +489,13 @@ export default {
         console.log(response);
         this.user = {
           ...this.user,
-          isFollowed: false,
+          isFollowed: false
         };
       } catch (error) {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取消追蹤，請稍後再試",
+          title: "無法取消追蹤，請稍後再試"
         });
       }
     },
@@ -553,7 +513,7 @@ export default {
 
         // 資料處理：假如使用者並未修改名字以外的三個key，則刪除該key
         const otherKey = ["introduction", "cover", "avatar"];
-        otherKey.forEach((item) => {
+        otherKey.forEach(item => {
           if (!item) {
             formData.delete(item);
           }
@@ -573,13 +533,13 @@ export default {
           avatar,
           cover,
           name,
-          introduction,
+          introduction
         };
       } catch (error) {
         console.log("error:", error);
         Toast.fire({
           icon: "error",
-          title: "暫時無法更新用戶資料，請稍候再試！",
+          title: "暫時無法更新用戶資料，請稍候再試！"
         });
       }
       $("#postEdit").modal("hide");
@@ -601,7 +561,7 @@ export default {
       this.avatar = "";
       this.name = "";
       this.introduction = "";
-    },
+    }
   },
   created() {
     const { id } = this.$route.params;
@@ -621,104 +581,91 @@ export default {
   watch: {
     // 控制名字 & 自介字數上限
     name: {
-      handler: function (value) {
+      handler: function(value) {
         if (value.length > 50) {
           Toast.fire({
             icon: "error",
-            title: "名字字數不可超過上限，煩請重新編輯！",
+            title: "名字字數不可超過上限，煩請重新編輯！"
           });
         }
-      },
+      }
     },
     introduction: {
-      handler: function (value) {
+      handler: function(value) {
         if (value.length > 160) {
           Toast.fire({
             icon: "error",
-            title: "自我介紹字數不可超過上限，煩請重新編輯！",
+            title: "自我介紹字數不可超過上限，煩請重新編輯！"
           });
         }
-      },
+      }
     },
     cover(newValue) {
       this.cover = newValue;
     },
     avatar(newValue) {
       this.avatar = newValue;
-    },
-  },
+    }
+  }
 };
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
 .upper-area-content {
-  display: flex;
-  align-items: top;
-  padding-left: 15px;
-}
+  @include upper-area-content;
+  p {
+    margin: 0;
+    line-height: 10px;
+  }
+  .name {
+    line-height: 19px;
+  }
 
-.upper-area-content p {
-  margin: 0;
-  line-height: 10px;
-}
-
-.name {
-  line-height: 19px;
-}
-
-.tweets-count {
-  color: #657786;
+  .tweets-count {
+    color: $small_text;
+  }
 }
 
 .info-area {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
-}
-
-.image-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.cover-cropper {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-
-.cover {
-  width: 100%;
-  display: inline;
-  object-fit: cover;
-}
-
-.image-cropper {
-  width: 140px;
-  height: 140px;
-  overflow: hidden;
-  border-radius: 50%;
-  position: relative;
-  border: 4px solid #ffffff;
-  position: absolute;
-  top: 60%;
-  left: 14px;
-}
-
-.avatar {
-  width: auto;
-  display: inline;
-  height: 100%;
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    .cover-cropper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      .cover {
+        width: 100%;
+        display: inline;
+        object-fit: cover;
+      }
+    }
+    .image-cropper {
+      @include image-cropper(140px);
+      border: 4px solid #ffffff;
+      position: absolute;
+      top: 60%;
+      left: 14px;
+      .avatar {
+        width: auto;
+        display: inline;
+        height: 100%;
+      }
+    }
+  }
 }
 
 .edit-btn {
   width: 122px;
   height: 40px;
   border-radius: 100px;
-  border: 1px solid #ff6600;
+  border: 1px solid $theme_orange;
   text-align: center;
   line-height: 40px;
-  color: #ff6600;
+  color: $theme_orange;
   cursor: pointer;
 }
 
@@ -728,7 +675,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #ff6600;
+  border: 1px solid $theme_orange;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -736,19 +683,25 @@ export default {
 }
 
 .noti-clicked {
-  background-color: #ff6600;
+  background-color: $theme_orange;
 }
 
 .following {
   width: 92px;
   height: 40px;
   line-height: 40px;
-  background-color: #ff6600;
+  background-color: $theme_orange;
   border-radius: 100px;
   font-size: 15px;
   color: #ffffff;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    display: none;
+  }
+  &:hover ~ .deleteFollow {
+    display: block;
+  }
 }
 
 .deleteFollow {
@@ -764,14 +717,6 @@ export default {
   cursor: pointer;
 }
 
-.following:hover {
-  display: none;
-}
-
-.following:hover ~ .deleteFollow {
-  display: block;
-}
-
 .unfollow {
   width: 62px;
   height: 40px;
@@ -779,78 +724,65 @@ export default {
   text-align: center;
   border-radius: 100px;
   font-size: 15px;
-  color: #ff6600;
-  border: 1px solid #ff6600;
+  color: $theme_orange;
+  border: 1px solid $theme_orange;
   cursor: pointer;
-}
-
-.unfollow:hover {
-  background-color: #ffede0;
+  &:hover {
+    background-color: #ffede0;
+  }
 }
 
 .intro-wrapper {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
-}
-
-.name {
-  font-size: 19px;
-}
-
-.account {
-  color: #657786;
-  line-height: 10px;
-  font-size: 15px;
-}
-
-.introduction {
-  font-size: 14px;
-  margin-bottom: 0;
+  .name {
+    font-size: 19px;
+  }
+  .account {
+    color: $small_text;
+    line-height: 10px;
+    font-size: 15px;
+  }
+  .introduction {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
 }
 
 .followship-wrapper {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
-}
-
-.followers-count,
-.followings-count {
-  margin-bottom: 0;
-  font-size: 14px;
-  color: #657786;
+  .followers-count,
+  .followings-count {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: $small_text;
+  }
 }
 
 .tab-area {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
-}
-
-.nav-link.active {
-  border: hidden;
-  border-bottom: 2px solid #ff6600;
-  color: #ff6600;
-}
-
-.nav-link {
-  color: #657786;
+  .nav-link {
+    color: $small_text;
+    &.active {
+      border: hidden;
+      border-bottom: 2px solid #ff6600;
+      color: #ff6600;
+    }
+  }
 }
 
 .modal-content {
   border-radius: 1rem;
   width: 500px;
-}
-
-.close {
-  height: 48px;
-  margin: -1rem -1rem -1rem -1rem;
-}
-
-.m-reply-container {
-  background-color: #fff;
-}
-
-.title {
-  margin: auto 66% auto 0;
+  .close {
+    height: 48px;
+    margin: -1rem -1rem -1rem -1rem;
+  }
+  .title {
+    margin: auto 66% auto 0;
+  }
 }
 
 .edit-cover {
@@ -859,114 +791,103 @@ export default {
   opacity: 80%;
   background-color: #999999;
   position: relative;
-}
+  .cover-edit-wrapper {
+    height: 100%;
+    width: 100%;
+    background-color: #9d9d9d;
+    .cover-sample,
+    .edit-cover-photo {
+      width: 100%;
+      display: inline;
+      object-fit: cover;
+    }
+    .new-cover-image {
+      border: 1px solid #000;
+      position: absolute;
+      width: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-200%, -50%);
+      z-index: 10;
+      opacity: 0;
+    }
+    .cover-camera {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-200%, -50%);
+      cursor: pointer;
+    }
 
-.cover-sample,
-.edit-cover-photo {
-  width: 100%;
-  display: inline;
-  object-fit: cover;
-}
-
-.new-cover-image {
-  border: 1px solid #000;
-  position: absolute;
-  width: 20px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-200%, -50%);
-  z-index: 10;
-  opacity: 0;
-}
-
-.cover-camera {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-200%, -50%);
-  cursor: pointer;
-}
-
-.cover-plus {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-350%, -40%);
-  cursor: pointer;
-}
-
-.avatar-edit-wrapper {
-  position: relative;
-  background-color: #9d9d9d;
-}
-
-.avatar-sample,
-.edit-avatar-photo {
-  width: auto;
-  display: inline;
-  height: 100%;
-  opacity: 80%;
-  object-fit: cover;
-}
-
-.cover-edit-wrapper {
-  height: 100%;
-  width: 100%;
-  background-color: #9d9d9d;
-}
-
-.cancel-edit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(40%, -50%);
-  z-index: 20;
-  cursor: pointer;
-}
-
-.avatar-camera {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-}
-
-.avatar-plus {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  cursor: pointer;
-}
-
-.edit-avatar {
-  border: 4px solid #fff;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  background-color: #fff;
-  overflow: hidden;
-  border-radius: 50%;
-  top: -5rem;
-  left: 0.8rem;
-}
-
-.new-avatar-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  z-index: 999;
+    .cover-plus {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-350%, -40%);
+      cursor: pointer;
+    }
+  }
+  .avatar-edit-wrapper {
+    position: relative;
+    background-color: #9d9d9d;
+    .edit-avatar {
+      border: 4px solid #fff;
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      background-color: #fff;
+      overflow: hidden;
+      border-radius: 50%;
+      top: -5rem;
+      left: 0.8rem;
+      .avatar-sample,
+      .edit-avatar-photo {
+        width: auto;
+        display: inline;
+        height: 100%;
+        opacity: 80%;
+        object-fit: cover;
+      }
+      .avatar-camera {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+      .avatar-plus {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        cursor: pointer;
+      }
+      .new-avatar-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        z-index: 999;
+      }
+      .cancel-edit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(40%, -50%);
+        z-index: 20;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .edit-area {
@@ -979,10 +900,9 @@ textarea {
   resize: none;
   -moz-appearance: none;
   padding-left: 8px;
-}
-
-textarea:focus {
-  outline: 0;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .edit-title {

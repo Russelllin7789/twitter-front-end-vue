@@ -32,8 +32,7 @@
                 params: { id: user.id, followship: 'followers' },
               }"
               class="nav-link"
-              >追隨者</router-link
-            >
+            >追隨者</router-link>
           </li>
           <li class="nav-item" @click.stop.prevent="toggleTab('followings')">
             <router-link
@@ -42,8 +41,7 @@
                 params: { id: user.id, followship: 'followings' },
               }"
               class="nav-link"
-              >正在追隨</router-link
-            >
+            >正在追隨</router-link>
           </li>
         </ul>
 
@@ -101,7 +99,7 @@ export default {
     FollowRecommend,
     Follower,
     Following,
-    Spinner,
+    Spinner
   },
   data() {
     return {
@@ -110,7 +108,7 @@ export default {
       user: {},
       userTweetsCount: -1,
       nowTabbed: this.$route.params.followship,
-      isLoading: true,
+      isLoading: true
     };
   },
   methods: {
@@ -124,13 +122,13 @@ export default {
         const { data } = response;
         this.user = {
           ...this.user,
-          ...data,
+          ...data
         };
       } catch (error) {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得使用者資料，請稍後再試",
+          title: "無法取得使用者資料，請稍後再試"
         });
       }
     },
@@ -149,7 +147,7 @@ export default {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得跟隨者資料，請稍後再試",
+          title: "無法取得跟隨者資料，請稍後再試"
         });
       }
     },
@@ -168,13 +166,13 @@ export default {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法取得跟隨中資料，請稍後再試",
+          title: "無法取得跟隨中資料，請稍後再試"
         });
       }
     },
     toggleTab(item) {
       this.nowTabbed = item;
-    },
+    }
   },
   created() {
     const { id } = this.$route.params;
@@ -194,45 +192,39 @@ export default {
     followings() {
       const { id } = this.$route.params;
       this.fetchFollowings(id);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .upper-area-content {
-  display: flex;
-  align-items: top;
-  padding-left: 15px;
-}
+  @include upper-area-content;
+  p {
+    margin: 0;
+    line-height: 10px;
+  }
+  .name {
+    line-height: 19px;
+    font-size: 19px;
+  }
 
-.upper-area-content p {
-  margin: 0;
-  line-height: 10px;
-}
-
-.name {
-  line-height: 19px;
-  font-size: 19px;
-}
-
-.tweets-count {
-  color: #657786;
+  .tweets-count {
+    color: $small_text;
+  }
 }
 
 .nav {
   border-left: 1px solid #e6ecf0;
   border-right: 1px solid #e6ecf0;
-}
-
-.nav-link.active {
-  border: hidden;
-  border-bottom: 2px solid #ff6600;
-  color: #ff6600;
-}
-
-.nav-link {
-  color: #657786;
+  .nav-link {
+    color: $small_text;
+    &.active {
+      border: hidden;
+      border-bottom: 2px solid $theme_orange;
+      color: $theme_orange;
+    }
+  }
 }
 
 .no-data {
@@ -241,6 +233,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #657786;
+  color: $small_text;
 }
 </style>

@@ -90,12 +90,6 @@ const routes = [
 
   },
   {
-    path: '/test',
-    name: 'test',
-    component: () => import('../views/Test')
-
-  },
-  {
     path: '*',
     name: 'not-found',
     component: NotFound

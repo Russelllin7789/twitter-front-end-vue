@@ -202,7 +202,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .right-content {
   flex-grow: 1;
 }
@@ -230,10 +230,9 @@ input {
 .password-toggle {
   visibility: hidden;
   position: absolute;
-}
-
-.password-toggle:checked ~ .password-group-wrapper {
-  transform: scale(1, 1);
+  &:checked ~ .password-group-wrapper {
+    transform: scale(1, 1);
+  }
 }
 
 .password-toggle-label {
@@ -242,12 +241,10 @@ input {
   padding: 3px 10px;
   margin: 0;
   box-shadow: 0 0 1px 1.5px lightgray;
-}
-
-.password-toggle-label:hover {
-  color: #ff6601;
-  border: 2px solid #ff6601;
-
+  &:hover {
+    color: $theme_orange;
+    border: 2px solid $theme_orange;
+  }
 }
 
 .password-group-wrapper {
@@ -256,23 +253,10 @@ input {
   transition: transform 0.3s ease-in-out;
 }
 
-/* .toggle-wrapper {
-  height: 40px;
-  line-height: 40px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #ebeef0;
-}
-
-.toggle-wrapper:hover {
-  background-color: #f7f9fa;
-  border-bottom: 2px solid #ff6600;
-} */
-
 .down-arrow {
   display: inline-block;
   margin: 0 5px 0 15px;
-  transform: rotate(.25turn);
+  transform: rotate(0.25turn);
   padding-right: 0px;
 }
 </style>

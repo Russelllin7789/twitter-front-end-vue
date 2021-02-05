@@ -99,7 +99,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .alphitterLogo {
   margin-top: 72.51px;
   height: 50px;
@@ -111,13 +111,7 @@ h5 {
 }
 
 input {
-  width: 40%;
-  height: 48px;
-  margin: 10px;
-  padding: 10px;
-  border: 10px;
-  border-bottom: 3px solid #9d9d9d;
-  background-color: #f5f8fa;
+  @include input-style;
 }
 
 .others {
@@ -125,9 +119,6 @@ input {
 }
 
 button {
-  width: 40%;
-  margin: 15px 0 10px 0;
-  padding: 10px;
-  border-radius: 30px;
+  @include button-style;
 }
 </style>

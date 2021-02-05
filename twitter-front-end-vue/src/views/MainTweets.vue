@@ -156,20 +156,6 @@ export default {
   padding-left: 15px;
 }
 
-.image-cropper {
-  width: 50px;
-  height: 50px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.avatar {
-  width: auto;
-  display: inline;
-  height: 100%;
-}
-
 .make-reply:hover {
   cursor: pointer;
 }
